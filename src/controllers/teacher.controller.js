@@ -31,6 +31,7 @@ router.post(
         gender: req.body.gender,
         age: req.body.age,
         image_urls: filePaths,
+        classes: req.body.classes,
       });
 
       return res.send({ teacher });
