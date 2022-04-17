@@ -1,7 +1,5 @@
 const express = require("express");
 
-const passport = require("./configs/passport");
-
 const { register, login, profile } = require("./controllers/auth.controller");
 const teacherController = require("./controllers/teacher.controller");
 
