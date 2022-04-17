@@ -2,6 +2,7 @@ const express = require("express");
 
 const { register, login, profile } = require("./controllers/auth.controller");
 const teacherController = require("./controllers/teacher.controller");
+const { classController } = require("./controllers/class.controller");
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.post("/login", login);
 app.get("/user/:id", profile);
 
 app.use("/teachers", teacherController);
+app.use("/classes", classController);
 
 module.exports = app;

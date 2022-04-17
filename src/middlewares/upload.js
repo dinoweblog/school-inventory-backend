@@ -12,7 +12,6 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, callback) => {
   if (file.mimetype === "image/png" || file.mimetype === "image/jpeg") {
-    // To accept the file pass `true`, like so:
     callback(null, true);
   } else {
     callback(null, false);
@@ -43,24 +42,4 @@ const uploadSingle = (fieldName) => {
   };
 };
 
-const uploadMultiple = (fileCount, fieldName) => {
-  return (req, res, next) => {
-    const uploadItems = upload.array(fieldName, fileCount);
-
-    uploadItems(req, res, function (err) {
-      if (err instanceof multer.MulterError) {
-        return res
-          .status(400)
-          .send({ message: err.message, errorType: "MulterError" });
-      } else if (err) {
-        return res
-          .status(400)
-          .send({ message: err.message, errorType: "NormalError" });
-      }
-
-      next();
-    });
-  };
-};
-
-module.exports = { uploadSingle, uploadMultiple };
+module.exports = { uploadSingle };

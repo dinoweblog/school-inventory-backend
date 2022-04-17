@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     mobile: { type: Number, required: true },
     gender: { type: String, required: true },
+    roles: [{ type: String, required: true }],
   },
   {
     versionKey: false,
@@ -16,7 +17,6 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", function (next) {
-  
   if (!this.isModified("password")) return next();
   this.password = bcrypt.hashSync(this.password, 8);
   return next();

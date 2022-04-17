@@ -22,35 +22,14 @@ router.get("", async (req, res) => {
 router.post(
   "/single",
   authenticate,
-  authorise(["seller", "admin"]),
+  authorise(["admin"]),
   uploadSingle("image_urls"),
   async (req, res) => {
     try {
       const teacher = await Teacher.create({
         name: req.body.name,
-        price: req.body.price,
-        image_urls: req.file.path,
-      });
-
-      return res.send({ teacher });
-    } catch (err) {
-      return res.status(500).send(err);
-    }
-  }
-);
-
-router.post(
-  "/multiple",
-  authenticate,
-  authorise(["seller", "admin"]),
-  uploadMultiple(2, "image_urls"),
-  async (req, res) => {
-    try {
-      const filePaths = req.files.map((file) => file.path);
-
-      const teacher = await Teacher.create({
-        name: req.body.name,
-        price: req.body.price,
+        gender: req.body.gender,
+        age: req.body.age,
         image_urls: filePaths,
       });
 
