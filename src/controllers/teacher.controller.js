@@ -9,7 +9,7 @@ const authorise = require("../middlewares/authorise");
 
 const router = express.Router();
 
-router.get("", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const teachers = await Teacher.find().lean().exec();
 
@@ -20,7 +20,7 @@ router.get("", async (req, res) => {
 });
 
 router.post(
-  "/teachers",
+  "/",
 
   async (req, res) => {
     try {
