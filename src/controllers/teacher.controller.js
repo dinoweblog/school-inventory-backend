@@ -21,8 +21,6 @@ router.get("", async (req, res) => {
 
 router.post(
   "/teachers",
-  authenticate,
-  authorise(["admin"]),
 
   async (req, res) => {
     try {
