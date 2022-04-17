@@ -6,7 +6,7 @@ const teacherSchema = new mongoose.Schema(
     gender: { type: String, required: true },
     age: { type: Number, required: true },
     image_urls: [{ type: String, required: true }],
-    classes: [{ type: Schema.Types.ObjectId, ref: "class" }],
+    classes: [{ type: mongoose.Schema.Types.ObjectId, ref: "class" }],
   },
   {
     versionKey: false,
