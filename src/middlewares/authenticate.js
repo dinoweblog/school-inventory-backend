@@ -26,7 +26,7 @@ module.exports = async (req, res, next) => {
   const token = bearerToken.split(" ")[1];
   let user;
   try {
-    user = await verifyToken(token); // user.user
+    user = await verifyToken(token);
   } catch (err) {
     return res.status(401).send({ message: "The token is not valid" });
   }
