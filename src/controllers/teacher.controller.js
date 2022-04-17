@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const teachers = await Teacher.find().lean().exec();
+    const teachers = await Teacher.find().populate("classes").lean().exec();
 
     return res.send(teachers);
   } catch (err) {
