@@ -19,6 +19,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/search/:name", async (req, res) => {
+  try {
+    const tName = req.params.name;
+    const teachers = await Teacher.find({ name: { $eq: tName } })
+      .populate("classes")
+      .lean()
+      .exec();
+
+    return res.send(teachers);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+});
+
 router.post(
   "/",
 
