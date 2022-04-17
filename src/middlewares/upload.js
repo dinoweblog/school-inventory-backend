@@ -8,8 +8,6 @@ const storage = multer.diskStorage({
   filename: function (req, file, callback) {
     callback(null, Date.now() + "-" + file.originalname);
   },
-  // filename => 1641376861973-resume.png // akhil
-  // filename => 1641376861980-resume.png // nikhil
 });
 
 const fileFilter = (req, file, callback) => {
@@ -17,7 +15,6 @@ const fileFilter = (req, file, callback) => {
     // To accept the file pass `true`, like so:
     callback(null, true);
   } else {
-    // To reject this file pass `false`, like so:
     callback(null, false);
   }
 };
@@ -26,7 +23,7 @@ const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
   limits: {
-    fileSize: 1024 * 1024 * 5, // 1024 Bytes = 1 KB * 1024 = 1 MB * 5 = 5MB
+    fileSize: 1024 * 1024 * 5,
   },
 });
 
@@ -36,13 +33,11 @@ const uploadSingle = (fieldName) => {
 
     uploadItem(req, res, function (err) {
       if (err instanceof multer.MulterError) {
-        // A Multer error occurred when uploading.
         res.send({ message: err.message, errorType: "MulterError" });
       } else if (err) {
-        // An unknown error occurred when uploading.
         res.send({ message: err.message, errorType: "NormalError" });
       }
-      // Everything went fine.
+
       next();
     });
   };
@@ -54,17 +49,15 @@ const uploadMultiple = (fileCount, fieldName) => {
 
     uploadItems(req, res, function (err) {
       if (err instanceof multer.MulterError) {
-        // A Multer error occurred when uploading.
         return res
           .status(400)
           .send({ message: err.message, errorType: "MulterError" });
       } else if (err) {
-        // An unknown error occurred when uploading.
         return res
           .status(400)
           .send({ message: err.message, errorType: "NormalError" });
       }
-      // Everything went fine.
+
       next();
     });
   };

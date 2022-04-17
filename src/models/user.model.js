@@ -15,12 +15,8 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// salt => random string of characters
-
-// user = User.create(req.body), user = User.findOne(); user.email = "sdfgsdkf"; user.save()
-// user = User.findByIdAndUpdate(req.params.id, req.body) => password => different then the password in the db
 userSchema.pre("save", function (next) {
-  // either we are creating a user or we are updating a user
+  
   if (!this.isModified("password")) return next();
   this.password = bcrypt.hashSync(this.password, 8);
   return next();
