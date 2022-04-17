@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
 
 router.get("/search/:name", async (req, res) => {
   try {
-    const tName = req.params.name;
+    const tName = req.params.name.toLocaleLowerCase();
     const teachers = await Teacher.find({ name: { $eq: tName } })
       .populate("classes")
       .lean()
