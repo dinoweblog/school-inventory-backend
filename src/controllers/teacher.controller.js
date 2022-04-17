@@ -20,7 +20,7 @@ router.get("", async (req, res) => {
 });
 
 router.post(
-  "/single",
+  "/teachers",
   authenticate,
   authorise(["admin"]),
 
