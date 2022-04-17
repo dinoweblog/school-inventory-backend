@@ -23,16 +23,10 @@ router.post(
   "/single",
   authenticate,
   authorise(["admin"]),
-  uploadSingle("image_urls"),
+
   async (req, res) => {
     try {
-      const teacher = await Teacher.create({
-        name: req.body.name,
-        gender: req.body.gender,
-        age: req.body.age,
-        image_urls: filePaths,
-        classes: req.body.classes,
-      });
+      const teacher = await Teacher.create(req.body);
 
       return res.send({ teacher });
     } catch (err) {
