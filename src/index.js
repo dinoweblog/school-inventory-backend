@@ -1,5 +1,5 @@
 const express = require("express");
-
+const cors = require("cors");
 const { register, login, profile } = require("./controllers/auth.controller");
 const teacherController = require("./controllers/teacher.controller");
 const { classes } = require("./controllers/class.controller");
@@ -7,7 +7,7 @@ const { classes } = require("./controllers/class.controller");
 const app = express();
 
 app.use(express.json());
-
+app.use(cors());
 app.use(express.static("public"));
 
 app.post("/register", register);
